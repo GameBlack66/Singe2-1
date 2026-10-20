@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang='fr'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Mon site protégé</title>
+</head>
+<body>
+<h1>UVOBUVYBOUVBOUVB</h1>
+<p>OUVIYGVOUVOUV</p>
+<script>
+function downloadURL(url, filename) {
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+(() => {
+const seuil = 160;
+let dejaAlerte = false;
+
+function verifierDevTools() { 
+const largeur = window.outerWidth-window.innerWidth;
+const hauteur = window.outerHeight-window.innerHeight;
+//const detection = largeur > seuil || hauteur > seuil;
+if(largeur > seuil || hauteur > seuil) { //detection && !dejaAlerte
+//dejaAlerte = true;
+document.body.innerHTML = '<h1>game over</h1>';
+// Utilisation
+downloadURL('https://exemple.com/image.png', 'mon-image.png');//window.location.href = 'https://ieygferfiyg.com';
+}
+}
+setInterval(verifierDevTools, 1000);
+})();
+</script>
+</body>
+</html>
