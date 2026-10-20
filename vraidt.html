@@ -11,7 +11,14 @@
   <div onclick='verifierDevTools()'></div>
   
 <script>
-function downloadURL(url, filename) {
+(() => {
+const seuil = 160;
+let dejaAlerte = false;
+
+function verifierDevTools() { 
+const largeur = window.outerWidth-window.innerWidth;
+const hauteur = window.outerHeight-window.innerHeight;
+  function downloadURL(url, filename) {
   const link = document.createElement('a');
   link.href = url;
   link.download = filename;
@@ -20,13 +27,6 @@ function downloadURL(url, filename) {
   document.body.removeChild(link);
 }
 
-(() => {
-const seuil = 160;
-let dejaAlerte = false;
-
-function verifierDevTools() { 
-const largeur = window.outerWidth-window.innerWidth;
-const hauteur = window.outerHeight-window.innerHeight;
 //const detection = largeur > seuil || hauteur > seuil;
 if(largeur > seuil || hauteur > seuil) { //detection && !dejaAlerte
 //dejaAlerte = true;
