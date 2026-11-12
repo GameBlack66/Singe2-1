@@ -31,3 +31,12 @@ body {
      margin: 425px;
       background: linear-gradient(to bottom, #000000, #ffffff);
 }
+.sidebar-img {
+  width: 60px;
+  height: auto;
+    border: 2px solid black;
+    border-radius: 10px;
+}   /* in html: <div class="sidebar">
+  <img src="wikisinge.png" alt="Logo" class="sidebar-img">
+  <!-- autres éléments -->
+</div>   */
