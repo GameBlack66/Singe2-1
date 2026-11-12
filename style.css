@@ -13,7 +13,7 @@ body {
     margin: -10px;
     background-image: url("foretdessinges.jpg");
     position: -webkit-sticky;
-    position: sticky;
+    position: fixed;
     top: -1px;
 }
 
