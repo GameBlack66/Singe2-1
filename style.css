@@ -12,7 +12,9 @@ body {
     padding: 50px;
     margin: -10px;
     background-image: url("foretdessinges.jpg");
-    
+    position: -webkit-sticky;
+    position: sticky;
+    top: -1px;
 }
 
 .sidebarcoté {
