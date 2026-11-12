@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page avec Sidebar et Header</title>
+    <style>
+        /* Styles généraux */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #f4f6f9;
+        }
+
+        /* --- HEADER EN HAUT --- */
+        header {
+            height: 60px;
+            background-color: #1e293b;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 20px;
+            color: #38bdf8;
+        }
+
+        .header-center {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        /* --- CONTENEUR PRINCIPAL (Sidebar + Texte) --- */
+        .main-container {
+            display: flex;
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* --- SIDEBAR À GAUCHE --- */
+        sidebar {
+            width: 250px;
+            background-color: #0f172a;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            gap: 15px;
+            transition: transform 0.3s ease;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 5;
+        }
+
+        sidebar.closed {
+            transform: translateX(-100%);
+        }
+
+        sidebar button {
+            background-color: #334155;
+            color: white;
+            border: none;
+            padding: 12px;
+            text-align: left;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: background 0.2s;
+        }
+
+        sidebar button:hover {
+            background-color: #38bdf8;
+            color: #0f172a;
+        }
+
+        /* --- ZONE DE TEXTE AU CENTRE --- */
+        main {
+            flex: 1;
+            margin-left: 250px;
+            padding: 40px;
+            overflow-y: auto;
+            transition: margin-left 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        main.full-width {
+            margin-left: 0;
+        }
+
+        .content-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header en haut avec logo à gauche et texte au centre -->
+    <header>
+        <div class="header-left">
+            <div id="mon-icone"><button class="toggle-btn" onclick="toggleSidebar()">&#9776;</button></div>
+            <div class="logo">MonLogo</div>
+        </div>
+        <div class="header-center">Titre ou texte central de l'en-tête</div>
+        <div style="width: 50px;"></div> <!-- Pour équilibrer l'espace à droite -->
+    </header>
+
+    <!-- Corps principal -->
+    <div class="main-container">
+        <!-- Sidebar à gauche avec des boutons -->
+        <sidebar id="mySidebar">
+            <button onclick="changerTexte('Accueil')">Accueil</button>
+            <button onclick="changerTexte('Profil')">Mon Profil</button>
+            <button onclick="changerTexte('Paramètres')">Paramètres</button>
+            <button onclick="changerTexte('Contact')">Contact</button>
+        </sidebar>
+
+        <!-- Texte s'affichant au centre -->
+        <main id="mainContent">
+                <p id="texte-page" style="margin-top: 15px; color: #475569;">
+                    Bienvenue ! Cliquez sur les boutons de la barre latérale pour modifier ce contenu ou sur l'icône du menu en haut à gauche pour ouvrir/fermer la sidebar.
+                </p>
+            <div class="content-card">
+                <h1 id="titre-page">Accueil</h1>
+                <p id="texte-page" style="margin-top: 15px; color: #475569;">
+                    Bienvenue ! Cliquez sur les boutons de la barre latérale pour modifier ce contenu ou sur l'icône du menu en haut à gauche pour ouvrir/fermer la sidebar.
+                </p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('mySidebar');
+            const main = document.getElementById('mainContent');
+            sidebar.classList.toggle('closed');
+            main.classList.toggle('full-width');
+        }
+
+        function changerTexte(section) {
+            document.getElementById('titre-page').innerText = section;
+            document.getElementById('texte-page').innerText = "Vous consultez actuellement la section : " + section + ".";
+        }
+const icone = document.getElementById("mon-icone");
+
+icone.addEventListener("click", () => {
+  icone.animate(
+    [
+      { transform: "translate(0, 0)" },
+      { transform: "translate(5px, -5px)" },
+      { transform: "translate(0, 0)" }
+    ],
+    {
+      duration: 1000, 
+      iterations: 1       }
+  );
+});
+
+    </script>
+
+</body>
+</html>
