@@ -14,3 +14,8 @@ body {
     background-image: url("foretdessinges.jpg");
 }
 
+.sidebarcoté {
+     padding: 2050px;
+     margin: 425px;
+      background: linear-gradient(to bottom, #000000, #ffffff);
+}
