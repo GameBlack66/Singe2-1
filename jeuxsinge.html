@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+
+<html class="dark h-full" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>WikiMonkey - Jeu d'Arcade Mobile</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Rubik -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400..900;1,400..900&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed-dim": "#ffb68b",
+            "outline": "#879487",
+            "tertiary": "#ffb68b",
+            "inverse-primary": "#006d38",
+            "on-primary-fixed-variant": "#005229",
+            "outline-variant": "#3d4a3f",
+            "tertiary-fixed": "#ffdbc8",
+            "on-tertiary-fixed-variant": "#753400",
+            "primary": "#5ede8b",
+            "surface-container-lowest": "#1e0801",
+            "primary-fixed-dim": "#5ede8b",
+            "secondary-container": "#fecf00",
+            "on-secondary-fixed": "#231b00",
+            "error": "#ffb4ab",
+            "secondary-fixed-dim": "#eec200",
+            "on-secondary-container": "#6f5900",
+            "surface-bright": "#513123",
+            "surface-container": "#33180c",
+            "inverse-surface": "#ffdbcd",
+            "on-primary": "#00391a",
+            "surface-container-high": "#402215",
+            "secondary-fixed": "#ffe082",
+            "on-tertiary-container": "#481e00",
+            "on-surface-variant": "#bccabc",
+            "on-error-container": "#ffdad6",
+            "surface-container-low": "#2f1408",
+            "on-primary-fixed": "#00210d",
+            "inverse-on-surface": "#47291b",
+            "on-tertiary": "#522300",
+            "primary-container": "#10a65a",
+            "secondary": "#fff0c9",
+            "tertiary-container": "#e76e00",
+            "surface": "#250c03",
+            "surface-container-highest": "#4c2d1f",
+            "primary-fixed": "#7cfca5",
+            "on-background": "#ffdbcd",
+            "surface-tint": "#5ede8b",
+            "surface-variant": "#4c2d1f",
+            "surface-dim": "#250c03",
+            "on-secondary-fixed-variant": "#564500",
+            "on-primary-container": "#003116",
+            "on-tertiary-fixed": "#321200",
+            "background": "#250c03",
+            "on-surface": "#ffdbcd",
+            "on-error": "#690005",
+            "error-container": "#93000a",
+            "on-secondary": "#3c2f00"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "1.75rem",
+            "gutter": "0.75rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "margin": "1rem",
+            "space-lg": "1.25rem",
+            "space-md": "0.75rem"
+          },
+          "fontFamily": {
+            "body-lg": ["Rubik"],
+            "headline-lg": ["Rubik"],
+            "display-arcade": ["Rubik"],
+            "body-sm": ["Rubik"],
+            "label-caps": ["Rubik"],
+            "display-arcade-mobile": ["Rubik"],
+            "headline-md": ["Rubik"],
+            "title-sm": ["Rubik"],
+            "headline-lg-mobile": ["Rubik"]
+          },
+          "fontSize": {
+            "body-lg": ["16px", { "lineHeight": "22px", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "38px", "fontWeight": "800" }],
+            "display-arcade": ["48px", { "lineHeight": "52px", "fontWeight": "900" }],
+            "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+            "label-caps": ["11px", { "lineHeight": "14px", "fontWeight": "900" }],
+            "display-arcade-mobile": ["36px", { "lineHeight": "40px", "fontWeight": "900" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "800" }],
+            "title-sm": ["18px", { "lineHeight": "24px", "fontWeight": "700" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "32px", "fontWeight": "800" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* 3D Extrusion Styles & Arcade Physics */
+    .btn-3d-yellow {
+      background: linear-gradient(180deg, #FFD000 0%, #F5B800 100%);
+      box-shadow: 0 5px 0 #B87B00, 0 8px 12px rgba(0,0,0,0.4), inset 0 2px 0 rgba(255,255,255,0.6);
+      transition: all 0.08s ease;
+    }
+    .btn-3d-yellow:active {
+      transform: translateY(4px);
+      box-shadow: 0 1px 0 #B87B00, 0 3px 6px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.4);
+    }
+
+    .btn-3d-green {
+      background: linear-gradient(180deg, #10a65a 0%, #038043 100%);
+      box-shadow: 0 5px 0 #024F29, 0 8px 12px rgba(0,0,0,0.4), inset 0 2px 0 rgba(255,255,255,0.4);
+      transition: all 0.08s ease;
+    }
+    .btn-3d-green:active {
+      transform: translateY(4px);
+      box-shadow: 0 1px 0 #024F29, 0 3px 6px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.3);
+    }
+
+    .btn-3d-orange {
+      background: linear-gradient(180deg, #FF7A00 0%, #E05C00 100%);
+      box-shadow: 0 5px 0 #8F3700, 0 8px 12px rgba(0,0,0,0.4), inset 0 2px 0 rgba(255,255,255,0.4);
+      transition: all 0.08s ease;
+    }
+    .btn-3d-orange:active {
+      transform: translateY(4px);
+      box-shadow: 0 1px 0 #8F3700, 0 3px 6px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.3);
+    }
+
+    .btn-3d-wood {
+      background: linear-gradient(180deg, #4c2d1f 0%, #33180c 100%);
+      box-shadow: 0 4px 0 #1e0801, 0 6px 8px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+    .btn-3d-wood:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #1e0801, 0 2px 4px rgba(0,0,0,0.4);
+    }
+
+    /* Floating Jump & Idle Animations */
+    @keyframes monkey-float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(2deg); }
+    }
+    .animate-float {
+      animation: monkey-float 1.6s ease-in-out infinite;
+    }
+
+    @keyframes pulse-pop {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); filter: drop-shadow(0 0 12px #fecf00); }
+    }
+    .animate-glow {
+      animation: pulse-pop 1.8s ease-in-out infinite;
+    }
+
+    /* Dynamic particle and popup keyframe */
+    @keyframes score-pop-fade {
+      0% { opacity: 0; transform: translateY(10px) scale(0.6); }
+      20% { opacity: 1; transform: translateY(-10px) scale(1.2); }
+      75% { opacity: 1; transform: translateY(-32px) scale(1); }
+      100% { opacity: 0; transform: translateY(-48px) scale(0.85); }
+    }
+    .score-popup-anim {
+      animation: score-pop-fade 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    /* Gentle swinging foliage */
+    @keyframes vine-swing-left {
+      0%, 100% { transform: rotate(-3deg); }
+      50% { transform: rotate(5deg); }
+    }
+    @keyframes vine-swing-right {
+      0%, 100% { transform: rotate(4deg); }
+      50% { transform: rotate(-4deg); }
+    }
+    .swing-vine-l {
+      transform-origin: top center;
+      animation: vine-swing-left 4.5s ease-in-out infinite;
+    }
+    .swing-vine-r {
+      transform-origin: top center;
+      animation: vine-swing-right 5.2s ease-in-out infinite;
+    }
+
+    /* Game canvas styles */
+    #game-canvas {
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface select-none font-body-lg overflow-hidden h-full flex justify-center items-center">
+<!-- Mobile Viewport Frame (Simulating full-screen smartphone device) -->
+<div class="relative w-full h-full max-w-md bg-surface-container-lowest overflow-hidden flex flex-col justify-between shadow-2xl">
+<!-- GAMEPLAY ARENA CANVAS & PROCEDURAL TRACK -->
+<div class="absolute inset-0 z-0 overflow-hidden">
+<!-- Rich Jungle Gradient & Backdrop -->
+<div class="absolute inset-0 bg-gradient-to-b from-[#0f2c16] via-[#1b3d1f] to-[#120803]"></div>
+<!-- Sunlight Godrays through canopy -->
+<div class="absolute -top-10 left-1/4 w-96 h-[500px] bg-gradient-to-b from-secondary-container/15 to-transparent rotate-12 blur-xl pointer-events-none"></div>
+<div class="absolute -top-20 right-10 w-72 h-[450px] bg-gradient-to-b from-primary/10 to-transparent -rotate-12 blur-lg pointer-events-none"></div>
+<!-- Hanging Vines & Tropical Leaves (Interactive Atmosphere) -->
+<div class="swing-vine-l absolute top-10 -left-4 w-32 h-64 border-l-8 border-primary-container rounded-full opacity-60 pointer-events-none z-10"></div>
+<div class="swing-vine-r absolute top-12 -right-4 w-28 h-72 border-r-8 border-[#05a357] rounded-full opacity-65 pointer-events-none z-10"></div>
+<!-- HTML5 Canvas for the procedural endless track, platforms, collectibles & monkey -->
+<canvas class="absolute inset-0 w-full h-full z-0 block cursor-pointer" id="game-canvas"></canvas>
+<!-- Floating Score Popups Container -->
+<div class="absolute inset-0 z-20 pointer-events-none overflow-hidden" id="popup-layer"></div>
+</div>
+<!-- 1 & 2. TOP HUD & GAMEPLAY APP BAR -->
+<header class="relative z-30 pt-3 pb-2 px-3 bg-gradient-to-b from-surface-container-lowest/95 via-surface-container-lowest/75 to-transparent backdrop-blur-[2px]">
+<!-- Topmost Row: Brand Logo, Level Badge, and Action Buttons (Home / Pause) -->
+<div class="flex items-center justify-between gap-2">
+<!-- Left: WikiMonkey Brand Logo & Level Badge -->
+<div class="flex items-center gap-2">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-secondary-container shadow-md bg-surface-container-high flex-shrink-0 flex items-center justify-center p-0.5">
+<img alt="WikiMonkey Logo" class="w-full h-full object-cover rounded-full" src="https://lh3.googleusercontent.com/aida/ALJJyrCjj3FqSskyo_bbbqaaoirTY8TIYcigqlU_HmMonsO0-Ieb05P-iWudUM5eINZTY8rKc2-A9Cs15pC4DLfyvCQXapAxtPibUVFjwd52fykR4BCiokv6xnWp9kaZ4GESU8Vo9QCLYAJ2maKOaMUSPs7bAcHchnW-92LOYmA8CgPnYq2vhUXJQhH-zewTp-Bv_D4tMyLgGW0iJRMLImgX4XEZCufFjbVa_FmwTrn2t5ADug"/>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-body-lg text-secondary-container tracking-wide font-black uppercase leading-none drop-shadow">
+            WikiMonkey
+          </span>
+<!-- Level & Mode Badge -->
+<div class="inline-flex items-center gap-1.5 mt-1 bg-surface-container/90 px-2 py-0.5 rounded-full border border-outline-variant">
+<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+<span class="font-label-caps text-label-caps text-on-surface font-bold tracking-tight" id="level-badge">Niv. 1 • Infini</span>
+</div>
+</div>
+</div>
+<!-- Right: Mode Auto & Tactile 3D Action Buttons (Accueil & Pause) -->
+<div class="flex items-center gap-2">
+<!-- Auto-Run Toggle Switch Button -->
+<button aria-label="Course automatique" class="btn-3d-wood h-10 px-2.5 rounded-full flex items-center justify-center gap-1 border-2 border-[#543220] text-secondary active:scale-95 transition-all text-xs" id="btn-autorun" title="Course auto">
+<span class="material-symbols-outlined text-base text-primary" data-icon="fast_forward" style="font-variation-settings: 'FILL' 1;">fast_forward</span>
+<span class="font-label-caps text-[9px] font-black uppercase text-primary" id="autorun-label">AUTO: ON</span>
+</button>
+<!-- Return Home Arcade Button -->
+<button aria-label="Retour à l'accueil" class="btn-3d-wood w-10 h-10 rounded-full flex items-center justify-center border-2 border-[#543220] text-secondary active:scale-95 transition-transform" id="btn-home" title="Accueil">
+<span class="material-symbols-outlined text-xl" data-icon="home" data-weight="fill" style="font-variation-settings: 'FILL' 1;">home</span>
+</button>
+<!-- Pause Arcade Button -->
+<button aria-label="Mettre le jeu en pause" class="btn-3d-yellow w-11 h-11 rounded-full flex items-center justify-center border-2 border-[#B87B00] text-on-secondary active:scale-95 transition-transform" id="btn-pause-trigger" title="Pause">
+<span class="material-symbols-outlined text-2xl font-black" data-icon="pause" data-weight="fill" id="pause-icon" style="font-variation-settings: 'FILL' 1;">pause</span>
+</button>
+</div>
+</div>
+<!-- Second Row: Game HUD Counters (Banana Meter, Live Score, Health Hearts) -->
+<div class="mt-2.5 grid grid-cols-12 gap-1.5 items-center">
+<!-- Banana Counter Capsule (Cols 5) -->
+<div class="col-span-5 bg-surface-container/90 border border-outline-variant rounded-full pl-1 pr-2.5 py-1 flex items-center justify-between shadow-inner">
+<div class="flex items-center gap-1.5">
+<div class="w-7 h-7 rounded-full bg-secondary-container flex items-center justify-center shadow-md -ml-0.5">
+<span class="text-sm">🍌</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[9px] text-on-surface-variant font-bold uppercase leading-none">Bananes</span>
+<span class="font-headline-md text-body-sm text-secondary-container font-black tracking-tight leading-none mt-0.5" id="hud-banana">24</span>
+</div>
+</div>
+<span class="w-2 h-2 rounded-full bg-primary shadow-sm shadow-primary animate-pulse"></span>
+</div>
+<!-- Live Score Counter (Cols 4) -->
+<div class="col-span-4 bg-surface-container/90 border border-outline-variant rounded-full px-2 py-1 flex flex-col items-center justify-center shadow-inner">
+<span class="font-label-caps text-[9px] text-on-surface-variant font-bold uppercase leading-none">Score</span>
+<span class="font-headline-md text-body-sm text-on-surface font-black tracking-wider leading-none mt-0.5" id="hud-score">1,840</span>
+</div>
+<!-- Health / Lives Counter (Cols 3) -->
+<div class="col-span-3 bg-surface-container/90 border border-outline-variant rounded-full px-2 py-1 flex items-center justify-center gap-1 shadow-inner">
+<span class="material-symbols-outlined text-error text-base drop-shadow life-heart" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="material-symbols-outlined text-error text-base drop-shadow life-heart" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="material-symbols-outlined text-error text-base drop-shadow life-heart" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</div>
+<!-- Linear Banana Speed/Bonus Progress Gauge -->
+<div class="mt-2 w-full bg-surface-container-lowest/80 h-2.5 rounded-full p-0.5 border border-outline-variant/60 shadow-inner flex items-center overflow-hidden">
+<div class="h-full bg-gradient-to-r from-secondary-container via-primary to-secondary-fixed rounded-full transition-all duration-150 relative shadow-sm" id="hud-gauge" style="width: 48%;">
+<span class="absolute -right-1 -top-1 w-4 h-4 bg-secondary-fixed rounded-full border border-surface-container-lowest shadow flex items-center justify-center text-[8px] animate-pulse">✨</span>
+</div>
+</div>
+</header>
+<!-- MIDDLE GAMEPLAY INTERACTION NOTICE -->
+<div class="relative z-10 mx-auto px-3 py-1 bg-surface-container-lowest/80 backdrop-blur-xs rounded-full border border-outline-variant/40 flex items-center gap-1.5 opacity-90 transition-opacity" id="tip-banner">
+<span class="material-symbols-outlined text-xs text-primary animate-bounce" data-icon="swipe">swipe</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant font-medium">Touchez l'écran ou les boutons pour sauter d'une branche à l'autre !</span>
+</div>
+<!-- 4. CONTROLES TACTILES DU JEU (Mobile Arcade Controls HUD) -->
+<footer class="relative z-30 px-4 pb-5 pt-2 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/95 to-transparent">
+<!-- Top tier of bottom controls: Special Ability Trigger "SUPER RUSH BANANE" -->
+<div class="mb-2.5 flex justify-center">
+<button class="btn-3d-yellow w-full max-w-xs py-2 px-4 rounded-full flex items-center justify-between border-2 border-[#B87B00] group active:scale-95 transition-all shadow-xl" id="btn-super-rush">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 bg-surface-container-lowest/30 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary text-lg" data-icon="bolt" data-weight="fill" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div class="text-left">
+<span class="font-headline-md text-body-sm text-on-secondary font-black uppercase tracking-tight block leading-none">SUPER RUSH BANANE</span>
+<span class="font-label-caps text-[9px] text-[#564500] font-bold block leading-none mt-0.5" id="rush-status-text">BOOST +500 PTS • APPUYER</span>
+</div>
+</div>
+<span class="px-2 py-0.5 bg-primary-container text-on-primary-container font-label-caps text-label-caps rounded-full font-black animate-pulse" id="rush-badge">PRÊT</span>
+</button>
+</div>
+<!-- Bottom tier: D-Pad Directional Arrows & Jump Arcade Button -->
+<div class="flex items-center justify-between gap-3">
+<!-- Left / Right Directional Controls -->
+<div class="flex items-center gap-2 bg-surface-container/80 p-1.5 rounded-2xl border-2 border-[#543220] shadow-xl">
+<!-- Button Left -->
+<button aria-label="Déplacer à gauche" class="btn-3d-wood w-14 h-14 rounded-xl flex items-center justify-center border border-[#6f3e28] text-on-surface active:scale-90 transition-transform" id="btn-left">
+<span class="material-symbols-outlined text-3xl font-black" data-icon="arrow_back">arrow_back</span>
+</button>
+<!-- Button Right -->
+<button aria-label="Déplacer à droite" class="btn-3d-wood w-14 h-14 rounded-xl flex items-center justify-center border border-[#6f3e28] text-on-surface active:scale-90 transition-transform" id="btn-right">
+<span class="material-symbols-outlined text-3xl font-black" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Big Tactile "SAUTER" Arcade Action Button -->
+<button aria-label="Sauter" class="btn-3d-green flex-1 h-14 rounded-2xl border-2 border-[#024F29] flex items-center justify-center gap-2 text-white active:scale-95 transition-transform shadow-2xl" id="btn-jump">
+<span class="material-symbols-outlined text-3xl" data-icon="keyboard_double_arrow_up" data-weight="fill" style="font-variation-settings: 'FILL' 1;">keyboard_double_arrow_up</span>
+<div class="flex flex-col text-left">
+<span class="font-headline-md text-title-sm font-black tracking-wider uppercase leading-none drop-shadow">SAUTER</span>
+<span class="font-label-caps text-[10px] text-primary-fixed font-bold leading-none mt-0.5 tracking-tight">TAP / ESPACE</span>
+</div>
+</button>
+</div>
+</footer>
+<!-- 5. MENU MODAL DE PAUSE OVERLAY (Tactile Wood Plaque Layout) -->
+<div class="fixed inset-0 z-50 flex items-center justify-center px-4 bg-[#0A130B]/85 backdrop-blur-md hidden transition-opacity duration-200" id="pause-modal">
+<!-- Tactile Carved Wood Dialog Container -->
+<div class="relative w-full max-w-[360px] bg-surface-container border-4 border-[#543220] rounded-xl p-5 shadow-2xl text-center transform scale-95 transition-transform duration-150">
+<!-- Corner Bamboo Stud Accents -->
+<div class="absolute -top-2 -left-2 w-5 h-5 bg-secondary-container rounded-full border-2 border-surface-container-lowest shadow"></div>
+<div class="absolute -top-2 -right-2 w-5 h-5 bg-secondary-container rounded-full border-2 border-surface-container-lowest shadow"></div>
+<div class="absolute -bottom-2 -left-2 w-5 h-5 bg-secondary-container rounded-full border-2 border-surface-container-lowest shadow"></div>
+<div class="absolute -bottom-2 -right-2 w-5 h-5 bg-secondary-container rounded-full border-2 border-surface-container-lowest shadow"></div>
+<!-- Header Title Ribbon -->
+<div class="relative -mt-9 mb-4 inline-block bg-gradient-to-r from-tertiary-container via-tertiary to-tertiary-container px-6 py-2 rounded-full border-2 border-[#8F3700] shadow-lg">
+<span class="font-headline-md text-headline-md text-surface-container-lowest font-black uppercase tracking-wider drop-shadow-sm">
+          JEU EN PAUSE
+        </span>
+</div>
+<!-- Current Level Stats Snapshot inside Pause -->
+<div class="bg-surface-container-lowest/80 border border-outline-variant/60 rounded-DEFAULT p-3 mb-5 flex justify-around items-center">
+<div class="flex flex-col items-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant font-bold uppercase">Bananes</span>
+<span class="font-headline-md text-body-lg text-secondary-container font-black" id="modal-banana">24</span>
+</div>
+<div class="w-px h-8 bg-outline-variant/40"></div>
+<div class="flex flex-col items-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant font-bold uppercase">Score</span>
+<span class="font-headline-md text-body-lg text-on-surface font-black" id="modal-score">1,840 pts</span>
+</div>
+</div>
+<!-- Stacked 3D Action Buttons -->
+<div class="space-y-3">
+<!-- Reprendre la partie -->
+<button class="btn-3d-green w-full py-3 px-4 rounded-DEFAULT border-2 border-[#024F29] flex items-center justify-center gap-2 text-white active:scale-95 transition-transform" id="btn-resume">
+<span class="material-symbols-outlined text-2xl" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+<span class="font-headline-md text-body-lg font-black uppercase tracking-wide">Reprendre la partie</span>
+</button>
+<!-- Recommencer le niveau -->
+<button class="btn-3d-yellow w-full py-3 px-4 rounded-DEFAULT border-2 border-[#B87B00] flex items-center justify-center gap-2 text-on-secondary active:scale-95 transition-transform" id="btn-restart">
+<span class="material-symbols-outlined text-2xl font-bold" data-icon="replay">replay</span>
+<span class="font-headline-md text-body-lg font-black uppercase tracking-wide">Recommencer</span>
+</button>
+<!-- Audio & Settings Quick Row -->
+<div class="grid grid-cols-2 gap-2 pt-1">
+<button class="btn-3d-wood py-2 px-3 rounded-DEFAULT border border-[#6f3e28] flex items-center justify-center gap-1.5 text-on-surface text-sm" id="btn-sound-toggle">
+<span class="material-symbols-outlined text-lg" data-icon="volume_up" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+<span class="font-label-caps text-label-caps font-bold">Son : ON</span>
+</button>
+<button class="btn-3d-wood py-2 px-3 rounded-DEFAULT border border-[#6f3e28] flex items-center justify-center gap-1.5 text-on-surface text-sm" id="btn-music-toggle">
+<span class="material-symbols-outlined text-lg" data-icon="music_note" style="font-variation-settings: 'FILL' 1;">music_note</span>
+<span class="font-label-caps text-label-caps font-bold">Musique : ON</span>
+</button>
+</div>
+<!-- Retour au menu principal -->
+<button class="btn-3d-orange w-full py-2.5 px-4 rounded-DEFAULT border-2 border-[#8F3700] flex items-center justify-center gap-2 text-white active:scale-95 transition-transform mt-2" id="btn-quit">
+<span class="material-symbols-outlined text-xl" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-headline-md text-body-sm font-black uppercase tracking-wider" href='index.html'>Retour au menu principal</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- PROCEDURAL INFINITE GAME ENGINE LOGIC -->
+<!-- ══════════ 🎵 MUSIQUE DE FOND ══════════ -->
+<audio id="musiqueJeu" loop preload="auto">
+  <!-- Remplace "musique.mp3" par le nom de ton fichier -->
+  <source src="musiquedejeuxvideo.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Bouton son flottant style arcade -->
+<div id="controleSon">
+  <input type="range" id="volumeJeu" min="0" max="100" value="50" aria-label="Volume">
+  <button id="boutonSon" aria-label="Son">🔊</button>
+</div>
+
+<style>
+  #controleSon{
+    position:fixed; right:18px; bottom:80px; z-index:9998;
+    display:flex; align-items:center; gap:10px;
+  }
+  #boutonSon{
+    width:54px; height:54px; font-size:26px; cursor:pointer;
+    border-radius:12px; border:3px solid #fde400;
+    background:#131315; color:#fff;
+    transition:transform .15s ease, box-shadow .3s ease;
+    font-family: 'Anybody', sans-serif;
+  }
+  #boutonSon:hover{ transform:scale(1.12) rotate(-5deg); }
+  #controleSon.en-lecture #boutonSon{
+    box-shadow:0 0 16px rgba(253,228,0,.85);
+    animation:pulseSon 1.4s ease-in-out infinite;
+  }
+  @keyframes pulseSon{ 50%{ box-shadow:0 0 30px rgba(253,228,0,.45); } }
+  #volumeJeu{
+    width:90px; accent-color:#fde400;
+    opacity:0; transform:translateX(10px);
+    transition:opacity .25s, transform .25s;
+  }
+  #controleSon:hover #volumeJeu{ opacity:1; transform:none; }
+</style>
+
+<script>
+  // ═══ AUDIO ENGINE ═══
+  const musique   = document.getElementById('musiqueJeu');
+  const boutonSon = document.getElementById('boutonSon');
+  const volumeJeu = document.getElementById('volumeJeu');
+  const controle  = document.getElementById('controleSon');
+
+  let volumeCible = 0.5;
+  musique.volume = 0;
+
+  function fonduEntree(){
+    musique.volume = 0;
+    const fondu = setInterval(() => {
+      musique.volume = Math.min(volumeCible, musique.volume + 0.02);
+      if (musique.volume >= volumeCible) clearInterval(fondu);
+    }, 50);
+  }
+
+  function jouerMusique(){
+    musique.currentTime = 0;
+    musique.play().then(fonduEntree).catch(e => console.log('Lecture bloquée:', e));
+    boutonSon.textContent = '🔊';
+    controle.classList.add('en-lecture');
+  }
+
+  function pauseMusique(){
+    musique.pause();
+    boutonSon.textContent = '🔇';
+    controle.classList.remove('en-lecture');
+  }
+
+  // Bouton son
+  boutonSon.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (musique.paused) {
+      musique.play().then(fonduEntree);
+      boutonSon.textContent = '🔊';
+      controle.classList.add('en-lecture');
+    } else {
+      musique.pause();
+      boutonSon.textContent = '🔇';
+      controle.classList.remove('en-lecture');
+    }
+  });
+
+  volumeJeu.addEventListener('input', () => {
+    volumeCible = volumeJeu.value / 100;
+    musique.volume = volumeCible;
+  });
+
+  // ═══ BRANCHEMENT AU JEU ═══
+  // On intercepte les clics sur START et RECOMMENCER
+  document.getElementById('btn-start').addEventListener('click', jouerMusique);
+  document.getElementById('btn-restart').addEventListener('click', jouerMusique);
+
+  // Hook la fonction gameOver pour mettre en pause
+  const originalGameOver = window.gameOver;
+  window.gameOver = function(){
+    pauseMusique();
+    originalGameOver();
+  };
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('game-canvas');
+    const ctx = canvas.getContext('2d');
+    const popupLayer = document.getElementById('popup-layer');
+
+    const hudScore = document.getElementById('hud-score');
+    const hudBanana = document.getElementById('hud-banana');
+    const hudGauge = document.getElementById('hud-gauge');
+    const pauseModal = document.getElementById('pause-modal');
+    const modalScore = document.getElementById('modal-score');
+    const modalBanana = document.getElementById('modal-banana');
+
+    const btnPause = document.getElementById('btn-pause-trigger');
+    const btnResume = document.getElementById('btn-resume');
+    const btnRestart = document.getElementById('btn-restart');
+    const btnHome = document.getElementById('btn-home');
+    const btnQuit = document.getElementById('btn-quit');
+    const btnAutorun = document.getElementById('btn-autorun');
+    const autorunLabel = document.getElementById('autorun-label');
+    const btnJump = document.getElementById('btn-jump');
+    const btnLeft = document.getElementById('btn-left');
+    const btnRight = document.getElementById('btn-right');
+    const btnSuperRush = document.getElementById('btn-super-rush');
+    const btnSound = document.getElementById('btn-sound-toggle');
+
+    // Audio synthesizer context for playful arcade feedback
+    let audioCtx = null;
+    let soundEnabled = true;
+
+    function playBeep(type = 'coin') {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        const now = audioCtx.currentTime;
+        if (type === 'coin') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(587.33, now); // D5
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.12); // A5
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+          osc.start(now);
+          osc.stop(now + 0.15);
+        } else if (type === 'jump') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(260, now);
+          osc.frequency.exponentialRampToValueAtTime(600, now + 0.18);
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+          osc.start(now);
+          osc.stop(now + 0.2);
+        } else if (type === 'rush') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.linearRampToValueAtTime(1040, now + 0.35);
+          gain.gain.setValueAtTime(0.25, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+          osc.start(now);
+          osc.stop(now + 0.4);
+        }
+      } catch (e) {}
+    }
+
+    // Canvas Resizing
+    let width = 0;
+    let height = 0;
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      canvas.width = width * window.devicePixelRatio;
+      canvas.height = height * window.devicePixelRatio;
+      ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Game State
+    let isPaused = false;
+    let autoRun = true;
+    let score = 1840;
+    let bananas = 24;
+    let gaugeVal = 48;
+    let rushAvailable = true;
+
+    // Procedural World Parameters
+    let scrollSpeed = 2.4; // Continuous upward or platform downward scroll
+    let worldY = 0;
+    
+    // Player Character Definition
+    const player = {
+      x: 180,
+      y: 350,
+      vx: 0,
+      vy: 0,
+      radius: 28,
+      grounded: false,
+      currentPlatform: null,
+      facing: 1, // 1: right, -1: left
+      swingPhase: 0,
+      jumpForce: -11.5,
+      gravity: 0.42
+    };
+
+    // Arrays for procedural elements
+    let platforms = [];
+    let collectibles = [];
+    let particles = [];
+    let backgroundVines = [];
+
+    // Helper: Random in range
+    const rand = (min, max) => Math.random() * (max - min) + min;
+
+    // Initialize initial procedural landscape
+    function initWorld() {
+      platforms = [];
+      collectibles = [];
+      particles = [];
+      backgroundVines = [];
+
+      // Ground / Start base platform
+      platforms.push({
+        x: width * 0.15,
+        y: height * 0.65,
+        width: width * 0.7,
+        height: 18,
+        type: 'wood'
+      });
+
+      player.x = width * 0.5;
+      player.y = height * 0.65 - player.radius;
+      player.vx = 0;
+      player.vy = 0;
+
+      // Generate staggered platforms up and down
+      let currentY = height * 0.65 - 110;
+      for (let i = 0; i < 9; i++) {
+        spawnPlatform(currentY);
+        currentY -= rand(90, 130);
+      }
+
+      // Background decorative swinging vines
+      for (let i = 0; i < 6; i++) {
+        backgroundVines.push({
+          x: rand(20, width - 20),
+          y: rand(-height, height),
+          len: rand(120, 240),
+          angle: 0,
+          speed: rand(0.015, 0.035)
+        });
+      }
+    }
+
+    function spawnPlatform(yPos) {
+      const pWidth = rand(110, 170);
+      const minX = 25;
+      const maxX = width - pWidth - 25;
+      const xPos = rand(minX, Math.max(minX + 10, maxX));
+
+      const plat = {
+        x: xPos,
+        y: yPos,
+        width: pWidth,
+        height: 18,
+        type: Math.random() > 0.4 ? 'wood' : 'bamboo'
+      };
+      platforms.push(plat);
+
+      // Procedurally spawn banana or combo star on platform
+      if (Math.random() < 0.8) {
+        collectibles.push({
+          x: xPos + pWidth / 2 + rand(-20, 20),
+          y: yPos - 32,
+          radius: 14,
+          type: Math.random() > 0.25 ? 'banana' : 'combo',
+          collected: false,
+          floatOffset: Math.random() * Math.PI * 2
+        });
+      }
+    }
+
+    // Popup Text Animation
+    function showScorePopup(text, x, y, isSpecial = false) {
+      const pop = document.createElement('div');
+      pop.className = 'absolute score-popup-anim font-headline-md pointer-events-none flex items-center gap-1 z-30 font-black';
+      pop.style.left = `${x}px`;
+      pop.style.top = `${y}px`;
+
+      if (isSpecial) {
+        pop.innerHTML = `<span class="bg-secondary-container text-surface-container-lowest px-2 py-0.5 rounded-full border border-white text-xs drop-shadow-lg">${text}</span>`;
+      } else {
+        pop.innerHTML = `<span class="bg-surface-container-lowest/90 text-secondary-fixed border border-secondary-container px-2 py-0.5 rounded-full text-xs drop-shadow">${text}</span>`;
+      }
+      popupLayer.appendChild(pop);
+      setTimeout(() => pop.remove(), 900);
+    }
+
+    // Particle Burst on Collect
+    function createSparks(x, y, color = '#fecf00') {
+      for (let i = 0; i < 9; i++) {
+        particles.push({
+          x: x,
+          y: y,
+          vx: (Math.random() - 0.5) * 5,
+          vy: (Math.random() - 0.5) * 5 - 1,
+          radius: rand(2.5, 4.5),
+          color: color,
+          alpha: 1,
+          decay: rand(0.02, 0.04)
+        });
+      }
+    }
+
+    // Jumping trigger
+    function triggerJump() {
+      if (isPaused) return;
+      playBeep('jump');
+      player.vy = player.jumpForce;
+      player.grounded = false;
+
+      // Small hop score
+      score += 10;
+      hudScore.textContent = score.toLocaleString();
+      showScorePopup('+10 JUMP', player.x, player.y - 20);
+
+      // Puff of dust particle
+      createSparks(player.x, player.y + player.radius, '#5ede8b');
+    }
+
+    function triggerRush() {
+      if (isPaused) return;
+      playBeep('rush');
+      score += 500;
+      bananas += 10;
+      hudScore.textContent = score.toLocaleString();
+      hudBanana.textContent = bananas;
+      gaugeVal = Math.min(100, gaugeVal + 30);
+      hudGauge.style.width = gaugeVal + '%';
+
+      showScorePopup('+500 RUSH BANANE! ✨', player.x - 30, player.y - 45, true);
+      createSparks(player.x, player.y, '#5ede8b');
+      createSparks(player.x, player.y, '#fecf00');
+
+      // Super jump boost
+      player.vy = -14;
+      player.grounded = false;
+    }
+
+    // Input handlers
+    btnJump.addEventListener('click', triggerJump);
+    btnSuperRush.addEventListener('click', triggerRush);
+
+    // Directional buttons
+    let moveLeft = false;
+    let moveRight = false;
+    
+    btnLeft.addEventListener('touchstart', (e) => { e.preventDefault(); moveLeft = true; player.facing = -1; }, { passive: false });
+    btnLeft.addEventListener('touchend', () => { moveLeft = false; });
+    btnLeft.addEventListener('mousedown', () => { moveLeft = true; player.facing = -1; });
+    btnLeft.addEventListener('mouseup', () => { moveLeft = false; });
+
+    btnRight.addEventListener('touchstart', (e) => { e.preventDefault(); moveRight = true; player.facing = 1; }, { passive: false });
+    btnRight.addEventListener('touchend', () => { moveRight = false; });
+    btnRight.addEventListener('mousedown', () => { moveRight = true; player.facing = 1; });
+    btnRight.addEventListener('mouseup', () => { moveRight = false; });
+
+    // Keyboard support (Space, Arrows)
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space' || e.code === 'ArrowUp') {
+        e.preventDefault();
+        triggerJump();
+      } else if (e.code === 'ArrowLeft') {
+        moveLeft = true;
+        player.facing = -1;
+      } else if (e.code === 'ArrowRight') {
+        moveRight = true;
+        player.facing = 1;
+      } else if (e.code === 'KeyP') {
+        togglePause();
+      }
+    });
+
+    window.addEventListener('keyup', (e) => {
+      if (e.code === 'ArrowLeft') moveLeft = false;
+      if (e.code === 'ArrowRight') moveRight = false;
+    });
+
+    // Canvas Direct Tap to Jump
+    canvas.addEventListener('pointerdown', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      if (clickX < width * 0.35) {
+        player.vx = -4.5;
+        player.facing = -1;
+      } else if (clickX > width * 0.65) {
+        player.vx = 4.5;
+        player.facing = 1;
+      }
+      triggerJump();
+    });
+
+    // Auto-Run Button Toggle
+    btnAutorun.addEventListener('click', () => {
+      autoRun = !autoRun;
+      if (autoRun) {
+        autorunLabel.textContent = 'AUTO: ON';
+        autorunLabel.classList.replace('text-on-surface-variant', 'text-primary');
+      } else {
+        autorunLabel.textContent = 'AUTO: OFF';
+        autorunLabel.classList.replace('text-primary', 'text-on-surface-variant');
+      }
+    });
+
+    // Pause Modals
+    function togglePause() {
+      isPaused = !isPaused;
+      if (isPaused) {
+        pauseModal.classList.remove('hidden');
+        modalScore.textContent = score.toLocaleString() + ' pts';
+        modalBanana.textContent = bananas;
+      } else {
+        pauseModal.classList.add('hidden');
+      }
+    }
+
+    btnPause.addEventListener('click', togglePause);
+    btnResume.addEventListener('click', togglePause);
+    btnHome.addEventListener('click', togglePause);
+    btnQuit.addEventListener('click', togglePause);
+
+    btnRestart.addEventListener('click', () => {
+      score = 0;
+      bananas = 0;
+      gaugeVal = 20;
+      hudScore.textContent = score;
+      hudBanana.textContent = bananas;
+      hudGauge.style.width = '20%';
+      initWorld();
+      togglePause();
+    });
+
+    btnSound.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      const icon = btnSound.querySelector('.material-symbols-outlined');
+      const text = btnSound.querySelector('span:not(.material-symbols-outlined)');
+      if (soundEnabled) {
+        icon.textContent = 'volume_up';
+        text.textContent = 'Son : ON';
+      } else {
+        icon.textContent = 'volume_off';
+        text.textContent = 'Son : OFF';
+      }
+    });
+
+    // Main Procedural Game Loop
+    initWorld();
+    let lastTime = performance.now();
+
+    function gameLoop(now) {
+      requestAnimationFrame(gameLoop);
+      if (isPaused) return;
+
+      const dt = Math.min((now - lastTime) / 1000, 0.1);
+      lastTime = now;
+
+      // Update Procedural Scroll
+      worldY += scrollSpeed;
+
+      // Horizontal player input & movement
+      if (moveLeft) player.vx = -4.5;
+      else if (moveRight) player.vx = 4.5;
+      else player.vx *= 0.88;
+
+      // Auto-jump logic when Auto-run is ON and monkey lands or needs forward momentum
+      if (autoRun) {
+        if (player.grounded) {
+          triggerJump();
+          // Gentle autonomous steering towards nearest banana or center
+          const targetItem = collectibles.find(c => !c.collected && c.y < player.y && c.y > player.y - 180);
+          if (targetItem) {
+            player.vx = (targetItem.x - player.x) * 0.04;
+            player.facing = player.vx >= 0 ? 1 : -1;
+          } else {
+            // Keep towards middle track
+            player.vx = (width / 2 - player.x) * 0.02;
+          }
+        }
+      }
+
+      player.x += player.vx;
+      // Boundaries
+      if (player.x < player.radius) player.x = player.radius;
+      if (player.x > width - player.radius) player.x = width - player.radius;
+
+      // Gravity and Vertical Physics
+      player.vy += player.gravity;
+      player.y += player.vy;
+
+      // Continuous downward world progression relative to player
+      // Move all platforms & collectibles downwards
+      const effectiveScroll = scrollSpeed + (player.y < height * 0.4 ? (height * 0.4 - player.y) * 0.05 : 0);
+      player.y += effectiveScroll * 0.35;
+
+      for (let p of platforms) {
+        p.y += effectiveScroll;
+      }
+      for (let c of collectibles) {
+        c.y += effectiveScroll;
+      }
+      for (let v of backgroundVines) {
+        v.y += effectiveScroll * 0.4;
+        if (v.y > height + 100) v.y = -180;
+      }
+
+      // Check landing on platforms (falling down)
+      player.grounded = false;
+      if (player.vy >= 0) {
+        for (let p of platforms) {
+          if (
+            player.x + player.radius * 0.5 > p.x &&
+            player.x - player.radius * 0.5 < p.x + p.width &&
+            player.y + player.radius >= p.y &&
+            player.y + player.radius <= p.y + p.height + player.vy
+          ) {
+            player.y = p.y - player.radius;
+            player.vy = 0;
+            player.grounded = true;
+            break;
+          }
+        }
+      }
+
+      // If fallen below viewport, rescue back up (infinite runner mechanic)
+      if (player.y > height + 60) {
+        player.y = -30;
+        player.vy = 2;
+        player.x = width / 2;
+        score = Math.max(0, score - 50);
+        hudScore.textContent = score.toLocaleString();
+        showScorePopup('-50 OUPS!', player.x - 20, 100);
+      }
+
+      // Spawn new platforms procedurally at the top as old ones leave the bottom
+      platforms = platforms.filter(p => p.y < height + 80);
+      collectibles = collectibles.filter(c => c.y < height + 80 && !c.collected);
+
+      // Check highest platform
+      let highestY = Math.min(...platforms.map(p => p.y), height);
+      if (highestY > -40) {
+        spawnPlatform(highestY - rand(100, 135));
+      }
+
+      // Banana & Item Collection Collision
+      collectibles.forEach(item => {
+        if (item.collected) return;
+        const dist = Math.hypot(player.x - item.x, player.y - item.y);
+        if (dist < player.radius + item.radius + 6) {
+          item.collected = true;
+          playBeep('coin');
+          if (item.type === 'banana') {
+            bananas += 1;
+            score += 50;
+            showScorePopup('+50 🍌', item.x - 20, item.y);
+            createSparks(item.x, item.y, '#fecf00');
+          } else {
+            bananas += 2;
+            score += 150;
+            showScorePopup('COMBO x2! +150 ✨', item.x - 35, item.y, true);
+            createSparks(item.x, item.y, '#5ede8b');
+          }
+          hudScore.textContent = score.toLocaleString();
+          hudBanana.textContent = bananas;
+
+          // Increment gauge
+          gaugeVal = Math.min(100, gaugeVal + 3);
+          hudGauge.style.width = gaugeVal + '%';
+        }
+      });
+
+      // Update particles
+      particles.forEach(pt => {
+        pt.x += pt.vx;
+        pt.y += pt.vy;
+        pt.alpha -= pt.decay;
+      });
+      particles = particles.filter(pt => pt.alpha > 0);
+
+      // Continuous subtle score increment for infinite distance
+      if (Math.random() < 0.25) {
+        score += 1;
+        hudScore.textContent = score.toLocaleString();
+      }
+
+      // RENDERING
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw background hanging vines
+      ctx.strokeStyle = '#05a357';
+      ctx.lineWidth = 4;
+      ctx.lineCap = 'round';
+      backgroundVines.forEach(v => {
+        v.angle += v.speed;
+        const swingX = Math.sin(v.angle) * 16;
+        ctx.beginPath();
+        ctx.moveTo(v.x, v.y);
+        ctx.quadraticCurveTo(v.x + swingX, v.y + v.len / 2, v.x + swingX * 1.5, v.y + v.len);
+        ctx.stroke();
+
+        // Vine leaves
+        ctx.fillStyle = '#10a65a';
+        ctx.beginPath();
+        ctx.arc(v.x + swingX * 1.2, v.y + v.len * 0.7, 5, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Draw Platforms
+      platforms.forEach(p => {
+        // Platform shadow
+        ctx.fillStyle = 'rgba(15, 8, 3, 0.45)';
+        ctx.beginPath();
+        ctx.roundRect(p.x, p.y + 6, p.width, p.height, 9);
+        ctx.fill();
+
+        // Platform base
+        const grad = ctx.createLinearGradient(p.x, p.y, p.x, p.y + p.height);
+        if (p.type === 'bamboo') {
+          grad.addColorStop(0, '#513123');
+          grad.addColorStop(1, '#33180c');
+        } else {
+          grad.addColorStop(0, '#4c2d1f');
+          grad.addColorStop(1, '#250c03');
+        }
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.roundRect(p.x, p.y, p.width, p.height, 8);
+        ctx.fill();
+
+        // Platform border highlight
+        ctx.strokeStyle = '#753400';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Top moss / vine highlight
+        ctx.fillStyle = '#5ede8b';
+        ctx.beginPath();
+        ctx.roundRect(p.x + 4, p.y + 1, p.width - 8, 3, 2);
+        ctx.fill();
+
+        // Wood plank notches
+        ctx.fillStyle = '#1e0801';
+        for (let nx = p.x + 20; nx < p.x + p.width - 15; nx += 35) {
+          ctx.fillRect(nx, p.y + 4, 3, p.height - 8);
+        }
+      });
+
+      // Draw Collectibles (Bananas & Combo Stars)
+      const timeSec = now * 0.004;
+      collectibles.forEach(c => {
+        if (c.collected) return;
+        const bobY = Math.sin(timeSec + c.floatOffset) * 6;
+        const cy = c.y + bobY;
+
+        // Glowing circle
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(c.x, cy, c.radius + 6, 0, Math.PI * 2);
+        ctx.fillStyle = c.type === 'combo' ? 'rgba(94, 222, 139, 0.25)' : 'rgba(254, 207, 0, 0.25)';
+        ctx.fill();
+
+        // Outline ring
+        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = c.type === 'combo' ? '#5ede8b' : '#fecf00';
+        ctx.stroke();
+
+        // Item emoji
+        ctx.font = '18px Rubik, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(c.type === 'combo' ? '🍌✨' : '🍌', c.x, cy);
+        ctx.restore();
+      });
+
+      // Draw Sparks Particles
+      particles.forEach(pt => {
+        ctx.save();
+        ctx.globalAlpha = pt.alpha;
+        ctx.fillStyle = pt.color;
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, pt.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      });
+
+      // Draw Cute Animated WikiMonkey Character
+      drawMonkey(player.x, player.y, player.facing, player.grounded, now);
+    }
+
+    // Render Procedural Vector Monkey Mascot
+    function drawMonkey(x, y, facing, grounded, time) {
+      ctx.save();
+      ctx.translate(x, y);
+      if (facing < 0) {
+        ctx.scale(-1, 1);
+      }
+
+      // Small bounce scale
+      const breath = Math.sin(time * 0.008) * 1.5;
+
+      // Shadow below character when near platform
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.35)';
+      ctx.beginPath();
+      ctx.ellipse(0, 26, 20, 5, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Tail
+      ctx.strokeStyle = '#6b3819';
+      ctx.lineWidth = 5;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(-12, 10);
+      const tailWiggle = Math.sin(time * 0.01) * 8;
+      ctx.quadraticCurveTo(-26, 4 + tailWiggle, -28, -8 + tailWiggle);
+      ctx.stroke();
+
+      // Ears
+      // Outer ears
+      ctx.fillStyle = '#6b3819';
+      ctx.beginPath();
+      ctx.arc(-19, -4, 9, 0, Math.PI * 2);
+      ctx.arc(19, -4, 9, 0, Math.PI * 2);
+      ctx.fill();
+      // Inner ears
+      ctx.fillStyle = '#ffdbc8';
+      ctx.beginPath();
+      ctx.arc(-19, -4, 4.5, 0, Math.PI * 2);
+      ctx.arc(19, -4, 4.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Head / Body circle
+      ctx.fillStyle = '#6b3819';
+      ctx.beginPath();
+      ctx.arc(0, 0, 22 + breath * 0.3, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#1e0801';
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      // Face Mask (Tan peach heart/round shape)
+      ctx.fillStyle = '#ffdbc8';
+      ctx.beginPath();
+      ctx.ellipse(0, 3, 16, 14, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Cheerful Eyes
+      ctx.fillStyle = '#1e0801';
+      ctx.beginPath();
+      ctx.ellipse(-6, -1, 3.5, 5, 0, 0, Math.PI * 2);
+      ctx.ellipse(6, -1, 3.5, 5, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Eye catchlights
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(-5, -3, 1.4, 0, Math.PI * 2);
+      ctx.arc(7, -3, 1.4, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Cute Snout & Smile
+      ctx.fillStyle = '#f1ad88';
+      ctx.beginPath();
+      ctx.ellipse(0, 8, 8, 5, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Smile curve
+      ctx.strokeStyle = '#1e0801';
+      ctx.lineWidth = 1.6;
+      ctx.beginPath();
+      ctx.arc(0, 7.5, 4, 0.2, Math.PI - 0.2);
+      ctx.stroke();
+
+      // Hand holding Banana
+      ctx.save();
+      ctx.translate(14, 10);
+      ctx.rotate(0.3 + Math.sin(time * 0.01) * 0.2);
+      ctx.font = '16px Rubik, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('🍌', 0, 0);
+      ctx.restore();
+
+      ctx.restore();
+    }
+
+    // Start loop
+    requestAnimationFrame(gameLoop);
+  });
+</script>
+</body></html>
