@@ -8,4 +8,9 @@ title {
 body {
      background-image: url("background.png);
 }
+.sidebar {
+    padding: 50px;
+    margin: -10px;
+    background-image: url("https://t3.ftcdn.net/jpg/03/76/57/34/240_F_376573412_ZSTGjxDjgikqL8j1lO2ME3MkVRAqlduB.jpg");
+}
 
