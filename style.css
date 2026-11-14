@@ -58,7 +58,7 @@ body {
         /* --- HEADER EN HAUT --- */
         header {
             height: 60px;
-            background-color: #1e293b;
+            background-image: url("foretdessinges.jpg");
             color: white;
             display: flex;
             align-items: center;
