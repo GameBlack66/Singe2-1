@@ -10,7 +10,8 @@ header {
  }
 body {
      background-image: url("background.png");
-     
+}
+body {
      a {
      color:#5ce1e6;
       }
