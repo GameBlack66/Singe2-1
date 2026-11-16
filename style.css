@@ -10,6 +10,10 @@ background-color: black;
 }
 body {
      background-image: url("background.png");
+     
+     a {
+     color:#5ce1e6;
+      }
 }
 .sidebar {
     padding: 50px;
@@ -114,6 +118,4 @@ body {
             background-color: #38bdf8;
             color: #0f172a;
         }
-a {
-     color:#5ce1e6;
-      }
+
