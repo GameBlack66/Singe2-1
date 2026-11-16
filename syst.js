@@ -158,11 +158,9 @@ function displayQuestion() {
     document.getElementById("next").style.display = 'none';
 }
 async function startQuiz() {
-    await countdown(3);
+    await countdown(5);
     window.location.href = "questions.html";
    
-
-
 }
 function nextQuestion() {
     answered = false;
