@@ -1,11 +1,11 @@
-header {
+h1 {
      background: conic-gradient(#5ce1e6,#0079a7);
      background-clip: text;
      -webkit-background-clip: text;
      -webkit-text-fill-color: transparent;
      text-align: center;
 }
-h1 {
+header {
  color: black;
 body {
      background-image: url("background.png");
