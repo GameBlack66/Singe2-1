@@ -159,7 +159,7 @@ function displayQuestion() {
 }
 async function startQuiz() {
     await countdown(3);
-    window.location.href = "question.html";
+    window.location.href = "questions.html";
    
 
 
