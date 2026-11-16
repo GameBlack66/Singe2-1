@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gibbon</title>
+    <script src="syst.js" defer></script>
+    <link rel="stylesheet" href="styl.css">
+</head>
+
+
+<body style="background-color: cadetblue;">
+    <div class="present">
+        <h1 id="question"></h1>
+        <p style="text-align: right; font-size: 20px; color: chocolate; font-family: fantasy;"  id="scor">0</p>
+    </div>
+    <p id="feedback"></p>
+    <div class="score">
+        <p class="sco" id="points">0</p>
+        <p class="sco">/7</p>
+    </div>
+    <hr>
+    <div class="buttons">
+        <button class="button1" onclick="checkAnswer(0)"></button>
+        <button class="button2" onclick="checkAnswer(1)"></button>
+    </div>
+    <br>
+    <div class="buttons">
+        <button class="button3" onclick="checkAnswer(2)"></button>
+        <button class="button4" onclick="checkAnswer(3)"></button>
+    </div>
+    <button id="next" class="buttonend"
+        onclick="nextQuestion()" style="display:none;">
+        NEXT
+    </button>
+</body>
+</html>
+
+
