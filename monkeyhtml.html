@@ -137,13 +137,14 @@
     <!-- Header en haut avec logo à gauche et texte au centre -->
     <header>
         <div class="header-left">
-            <div id="mon-icone"><button class="toggle-btn" onclick="toggleSidebar()">&#9776;</button></div>
+            <div id="mon-icone"><button class="toggle-btn" onclick="toggleSidebar()" style="background: black;">&#9776;</button></div>
             <div class="logo">
                 <a href='index.html'><img src="wikimonkey.jpg" width='20%' style='border: 2px solid black; border-radius: 20px; '></a>
             </div>
         </div>
-        <div class="header-center">Titre ou texte central de l'en-tête</div>
-        <div style="width: 50px;"></div> <!-- Pour équilibrer l'espace à droite -->
+        <div class="header-center" style="background-color: black;">Wikimoney : des singes qui trient des singes ! </div>
+        <div style="width: 50px;"></div> 
+        
     </header>
 
     <!-- Corps principal -->
@@ -170,7 +171,7 @@
             </div>
         </main>
     </div>
-<p style="color: gold;">Ce texte est en or.</p>
+<p style="color: gold;">by the wikimoney team.</p>
     <script>
         function toggleSidebar() {
             const sidebar = document.getElementById('mySidebar');
