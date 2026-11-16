@@ -5,7 +5,8 @@ title {
      -webkit-text-fill-color: transparent;
      text-align: center;
 }
-
+h1 {
+ color: black;
 body {
      background-image: url("background.png");
 }
