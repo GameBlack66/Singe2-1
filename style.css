@@ -1,4 +1,4 @@
-h1 {
+/*h1 {
      background: conic-gradient(#5ce1e6,#0079a7);
      background-clip: text;
      -webkit-background-clip: text;
@@ -47,7 +47,7 @@ body {
 }   /* in html: <div class="sidebar">
   <img src="wikisinge.png" alt="Logo" class="sidebar-img">
   <!-- autres éléments -->
-</div>   */
+</div>   
 * {
             box-sizing: border-box;
             margin: 0;
@@ -118,5 +118,141 @@ body {
         sidebar button:hover {
             background-color: #38bdf8;
             color: #0f172a;
+        } */
+        /* Styles généraux */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
         }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+            background-image: url("background.jpg");
+			    background-size: cover;  
+				    background-size: cover;       /* ← à ajouter */
+    background-position: center;  /* ← à ajouter */
+    background-repeat: no-repeat;
+        }
+
+        /* --- HEADER EN HAUT --- */
+        header {
+            height: 125px;
+            background-image: url("foretdessinges.jpg");
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 20px;
+            color: #38bdf8;
+        }
+
+        .header-center {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        /* --- CONTENEUR PRINCIPAL (Sidebar + Texte) --- */
+        .main-container {
+            display: flex;
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* --- SIDEBAR À GAUCHE --- */
+        sidebar {
+            width: 250px;
+      background: linear-gradient(to bottom, #000000, #ffffff);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            gap: 15px;
+            transition: transform 0.3s ease;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 5;
+        }
+
+        sidebar.closed {
+            transform: translateX(-100%);
+        }
+
+        sidebar button {
+            background-color: #334155;
+            color: white;
+            border: none;
+            padding: 12px;
+            text-align: left;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: background 0.2s;
+        }
+
+        sidebar button:hover {
+            background-color: #38bdf8;
+            color: #0f172a;
+        }
+
+        /* --- ZONE DE TEXTE AU CENTRE --- */
+        main {
+            flex: 1;
+            margin-left: 250px;
+            padding: 40px;
+            overflow-y: auto;
+            transition: margin-left 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        main.full-width {
+            margin-left: 0;
+        }
+
+        .content-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            max-width: 600px;
+        }
+        .gold {
+  background: linear-gradient(45deg, #462523, #cb9b51 22%, #f6e27a 45%, #f6f2c0 50%, #f6e27a 55%, #cb9b51 78%, #462523);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
 
