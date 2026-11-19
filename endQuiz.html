@@ -19,6 +19,14 @@
     background-position: center;
     background-attachment: fixed;
 ">
+    <style>
+        .moveimg {
+            transition: transform 0.3s ease;
+        }
+        .moveimg:hover {
+            transform: translate(-10px, -10px);
+        }
+    </style>
     <h1 id="title">0</h1>
     <hr>
     <br>
@@ -37,7 +45,7 @@
             <img src="home.png" width="80" alt="Accueil">
         </a>
         <a href="questions.html" onclick="sessionStorage.clear()">
-            <img src="restart.jpg" width="80" alt="Recommencer">
+            <img src="restart.jpg" width="80" alt="Recommencer" class="moveimg">
         </a>
     </div>
     <script>
