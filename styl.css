@@ -87,12 +87,3 @@
     justify-content: center;
     align-items: center;
 }
-   {
-    width: 250px;
-    transition: transform 0.3s ease;
-  }
-
- :hover {
-    /* Déplace de 30px vers la droite et 15px vers le haut */
-    transform: translate(30px, -15px);
-  }
