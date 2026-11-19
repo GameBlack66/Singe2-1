@@ -19,8 +19,6 @@
     background-position: center;
     background-attachment: fixed;
 ">
-
-
     <h1 id="title">0</h1>
     <hr>
     <br>
@@ -42,6 +40,16 @@
             <img src="restart.jpg" width="80" alt="Recommencer">
         </a>
     </div>
+    <script>
+        let score = sessionStorage.getItem("score");
+        if (score !== null) {
+            document.getElementById("title").textContent =
+            "Ton score est de : " + score + "/7";
+        } else {
+            document.getElementById("title").textContent =
+            "Aucun score enregistré";
+        }
+    </script>
 </body>
 </html>
 
