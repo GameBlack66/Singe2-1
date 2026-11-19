@@ -87,7 +87,7 @@ function newQuestion() {
         index = index + 1;
     } else {
         alert("index < questions4.length");
-        sessionStorage.setItem("score", numquest);
+        sessionStorage.setItem("score", numQuest);
         window.location.href = "endQuiz.html";
         return;
         numQuest = 0;
