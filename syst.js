@@ -86,7 +86,6 @@ function newQuestion() {
         rightAns = indexOf(ans4[questnum][0], ansBuffer);
         index = index + 1;
     } else {
-        alert("index < questions4.length");
         sessionStorage.setItem("score", numQuest);
         window.location.href = "endQuiz.html";
         return;
