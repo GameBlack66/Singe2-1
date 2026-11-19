@@ -15,50 +15,44 @@ const ans4 = [
     ["Des unites familiales monogames", "Un harem dirige par un male dominant", "Des individus strictement solitairs", "De grandes troupes multi males et multi femelles"]
 ];
 
+const justifications = [
+    " Grace a la brachiation, ils peuvent faire des bonds de plus de 9 a 10 metres en un seul elan et atteindre des vitesses allant jusqu'a 55 km/h",
+    "Ils sont originaires des forets tropicales et subtropicales d'Asie du Sud, de l'Est et du Sud-Est (de l'Inde a l'Indonasie et a la Chine).",
+    "Ils se nourrissent à plus de 50 % de fruits (notamment des figues), mais complètent leur alimentation avec des feuilles, des fleurs, des graines et parfois des insectes ou des œufs d'oiseaux.",
+    "Le chant est un signal sonore puissant (audible jusqu'à plusieurs kilomètres) qui indique aux autres groupes rivaux que la zone est déjà occupée, évitant ainsi des combats physiques",
+    "Maîtres de la brachiation : Ils se déplacent en se balançant rapidement de branche en branche grâce à leurs bras très longs.",
+    "Comme les grands singes et les humains, les gibbons n'ont pas de queue.",
+    " La plupart des espèces de gibbons forment des couples monogames qui restent ensemble pour la vie."
+];
 
 function GOTO(ref) {
     window.location.href = ref;
 }
 
-
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-
 async function countdown(number) {
-
-
     for (let count = number; count > 0; count--) {
-
-
         document.body.innerHTML = `
             <h1 style="text-align: center; font-size: 150px; color: blue;">${count}</h1>
         `;
-
-
         await delay(1000);
     }
 }
-
-
-
 
 function chooseRandom(max) {
     return Math.floor(Math.random() * max);
 }
 
-
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0 ; i--) {
         let j = chooseRandom(i+1);
-
-
         [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
 }
-
 
 function indexOf(elem, array) {
     for (let index = 0; index < array.length; index++) {
@@ -68,7 +62,6 @@ function indexOf(elem, array) {
     }
     return -1;
 }
-
 
 let numQuest = 0;
 let num = 0;
@@ -81,34 +74,21 @@ let currentQuestion = "";
 let index = 0;
 let answered = false;
 
-
 function newQuestion() {
     if (index == 0) {
         quests = shuffleArray([...questions4]);
     }
     if (index < questions4.length) {
         currentQuestion = quests[index];
-
-
         num = chooseRandom(4);
-
-
         questnum = indexOf(currentQuestion, questions4);
-
-
         ansBuffer = shuffleArray([...ans4[questnum]]);
-
-
         rightAns = indexOf(ans4[questnum][0], ansBuffer);
-
-
         index = index + 1;
-
-
     } else {
+        sessionStorage.setItem("score", numquest);
         window.location.href = "endQuiz.html";
-
-
+        return;
         numQuest = 0;
         num = 0;
         quests = "";
@@ -135,7 +115,8 @@ function checkAnswer(butt) {
             document.getElementById("feedback").style.color = "red";
             document.getElementById("feedback").style.fontSize = "30px";
         }
-        document.getElementById("scor").textContent = "Your score is: " + numQuest;
+        document.getElementById("rightanswer").textContent = justifications[questnum];
+        document.getElementById("scor").textContent = "Score: " + numQuest;
         document.querySelectorAll(".buttons button").forEach(button => {
             button.disabled = true;
         });
@@ -145,6 +126,7 @@ function checkAnswer(butt) {
 function displayQuestion() {
     answered = false;
     document.getElementById("feedback").textContent = "";
+    document.getElementById("rightanswer").textContent = "";
     document.getElementById("next").style.display = "none";
     document.getElementById("question").textContent = currentQuestion;
     document.getElementById("points").textContent = index;
