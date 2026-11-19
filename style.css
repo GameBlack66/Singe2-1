@@ -120,7 +120,7 @@ body {
             color: #0f172a;
         } */
         /* Styles généraux */
-        * {
+       * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -134,15 +134,14 @@ body {
             overflow: hidden;
             background-image: url("background.jpg");
 			    background-size: cover;  
-				    background-size: cover;       /* ← à ajouter */
-    background-position: center;  /* ← à ajouter */
+				    background-size: cover;    
+    background-position: center; 
     background-repeat: no-repeat;
         }
 
-        /* --- HEADER EN HAUT --- */
         header {
             height: 125px;
-            background-image: url("foretdessinges.jpg");
+            background-image: url("realannimation.gif");
             color: white;
             display: flex;
             align-items: center;
@@ -177,7 +176,7 @@ body {
             font-weight: 500;
         }
 
-        /* --- CONTENEUR PRINCIPAL (Sidebar + Texte) --- */
+ 
         .main-container {
             display: flex;
             flex: 1;
@@ -185,7 +184,6 @@ body {
             overflow: hidden;
         }
 
-        /* --- SIDEBAR À GAUCHE --- */
         sidebar {
             width: 250px;
       background: linear-gradient(to bottom, #000000, #ffffff);
@@ -223,7 +221,6 @@ body {
             color: #0f172a;
         }
 
-        /* --- ZONE DE TEXTE AU CENTRE --- */
         main {
             flex: 1;
             margin-left: 250px;
@@ -255,4 +252,3 @@ body {
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
-
